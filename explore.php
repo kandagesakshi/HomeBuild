@@ -21,19 +21,20 @@
       if ($result->num_rows > 0):
           while ($row = $result->fetch_assoc()):
     ?>
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="card explore-card text-white">
-          <img src="<?php echo htmlspecialchars($row['image_path']); ?>" 
-               class="card-img" 
-               alt="<?php echo htmlspecialchars($row['name']); ?>">
-          <div class="card-img-overlay d-flex align-items-center justify-content-center">
-            <div>
-              <small class="card-subtitle " style="font-size: 0.75rem;"><?php echo htmlspecialchars($row['subtitle']); ?></small>
-              <h5 class="card-title fw-bold mb-0"><?php echo htmlspecialchars($row['name']); ?></h5>
-            </div>
+    <div class="col-10 col-sm-6 col-md-4 col-lg-3"> 
+      <div class="card explore-card text-white">
+        <img src="<?php echo htmlspecialchars($row['image_path']); ?>" 
+        class="card-img" 
+        style="filter: brightness(1.2);" 
+        alt="<?php echo htmlspecialchars($row['name']); ?>">
+        <div class="card-img-overlay d-flex align-items-center justify-content-center text-center">
+          <div>
+            <small class="card-subtitle d-block" style="font-size: 2.5rem;"><?php echo htmlspecialchars($row['subtitle']); ?></small>
+            <h5 class="card-title fw-bold mb-0"><?php echo htmlspecialchars($row['name']); ?></h5>
           </div>
         </div>
       </div>
+    </div>
     <?php
           endwhile;
       else:

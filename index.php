@@ -532,37 +532,50 @@ if ($brandResult && $row = $brandResult->fetch_assoc()) {
         </div>
     </div>
     <script>
-        document.getElementById("chatButton").addEventListener("click", function() {
-            document.getElementById("chatContainer").style.display = "flex";
-        });
-        document.getElementById("closeChat").addEventListener("click", function() {
-            document.getElementById("chatContainer").style.display = "none";
-        });
-        document.getElementById("sendMessage").addEventListener("click", function() {
-            let userText = document.getElementById("userInput").value;
-            if (userText.trim() !== "") {
-                let chatBody = document.getElementById("chatBody");
-                let userMessage = document.createElement("p");
-                userMessage.classList.add("user-message");
-                userMessage.textContent = userText;
-                chatBody.appendChild(userMessage);
-                // Define responses based on user input
-                const responses = {
-                    "What services does Hombuild offer?": "Hombuild offers custom home building, interior design, and renovation services.",
-                    "Can I see different house models you have built?": "Yes! We have a gallery of house models available on our website.",
-                    "Do you provide custom home-building services?": "Absolutely! We specialize in building custom homes based on your preferences.",
-                    "Where are your projects located?": "Our projects are located across multiple cities. Please visit our website for details.",
-                    "How much does it cost to build a house?": "The cost depends on the size, materials, and customization. Contact us for a free quote!"
-                };
-                // Auto-reply from bot
-                let botReply = document.createElement("p");
-                botReply.classList.add("bot-message");
-                botReply.textContent = responses[userText] || "I'm here to help! Please ask a relevant question.";
-                setTimeout(() => chatBody.appendChild(botReply), 500);
-                document.getElementById("userInput").value = "";
-                chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll
+    document.getElementById("chatButton").addEventListener("click", function() {
+        document.getElementById("chatContainer").style.display = "flex";
+    });
+    document.getElementById("closeChat").addEventListener("click", function() {
+        document.getElementById("chatContainer").style.display = "none";
+    });
+    document.getElementById("sendMessage").addEventListener("click", function() {
+        let userText = document.getElementById("userInput").value;
+        if (userText.trim() !== "") {
+            let chatBody = document.getElementById("chatBody");
+
+            // Display user's message
+            let userMessage = document.createElement("p");
+            userMessage.classList.add("user-message");
+            userMessage.textContent = userText;
+            chatBody.appendChild(userMessage);
+
+            // Convert input to lowercase for checking (optional if you plan to match patterns)
+            let lowerText = userText.toLowerCase();
+
+            // Default response
+            let botReply = document.createElement("p");
+            botReply.classList.add("bot-message");
+
+            // If input ends with a question mark or contains a question word, show contact response
+            if (lowerText.includes("?") || 
+                lowerText.includes("what") || 
+                lowerText.includes("how") || 
+                lowerText.includes("do you") || 
+                lowerText.includes("can i") || 
+                lowerText.includes("where") || 
+                lowerText.includes("when") || 
+                lowerText.includes("why")) {
+                botReply.textContent = "Please Contact Us! You can email us at contact@rgrealestate.in";
+            } else {
+                botReply.textContent = "I'm here to help! Please ask a relevant question.";
             }
-        });
+
+            // Show bot reply after short delay
+            setTimeout(() => chatBody.appendChild(botReply), 500);
+            document.getElementById("userInput").value = "";
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+    });
     </script>
     <!-- Chatbot Section ends  -->
 </body>
